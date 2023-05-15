@@ -21,11 +21,11 @@ function createTable(db) {
         password TEXT NOT NULL
     );
     CREATE TABLE IF NOT EXISTS subscriptions (
+        subs_id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id TEXT,
-        channel_id TEXT,
-        PRIMARY KEY (user_id, channel_id),
+        channel_name TEXT,
         FOREIGN KEY (user_id) REFERENCES users(user_id),
-        FOREIGN KEY (channel_id) REFERENCES channels(owner_id)
+        FOREIGN KEY (channel_name) REFERENCES channels(channel_name)
     );
     CREATE TABLE IF NOT EXISTS channels (
         channel_id INTEGER PRIMARY KEY AUTOINCREMENT,

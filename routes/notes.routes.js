@@ -16,8 +16,15 @@ router.post('/signup', async (request, response) => {
 
 })
 //Hämta anteckningar
-router.get('/notes', (request, response) => {
-
+router.post('/notes', async (request, response) => {
+    try {
+        const { user_id } = request.body;
+        const result = await saveUser(user_name, password);
+        response.json(result);
+    } catch (error) {
+        console.log('Error:', error);
+        response.status(500).json({ success: false, message: error.message });
+    }
 
 })
 

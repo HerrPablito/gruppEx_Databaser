@@ -1,0 +1,18 @@
+{
+  "name": "gruppex_databaser",
+  "version": "1.0.0",
+  "description": "examination",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "uuid-random": "^1.3.2"
+  }
+}

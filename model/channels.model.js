@@ -40,4 +40,4 @@ function subscribe(user_id, channel_name) {
     });
 
 }
-module.exports = saveChannel, subscribe;
+module.exports = {saveChannel, subscribe};

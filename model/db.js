@@ -28,13 +28,11 @@ function createTable(db) {
         FOREIGN KEY (channel_id) REFERENCES channels(owner_id)
     );
     CREATE TABLE IF NOT EXISTS channels (
-        channel_id TEXT PRIMARY KEY,
+        channel_id INTEGER PRIMARY KEY AUTOINCREMENT,
         owner_id TEXT NOT NULL,
-        notes_id TEXT,
         channel_name text NOT NULL,
-        FOREIGN KEY (owner_id) REFERENCES users(user_id),
-        FOREIGN KEY (notes_id) REFERENCES notes(note_id)
-    );
+        FOREIGN KEY (owner_id) REFERENCES users(user_id)
+       );
     CREATE TABLE IF NOT EXISTS notes (
         note_id INTEGER PRIMARY KEY AUTOINCREMENT,
         channel_name TEXT NOT NULL,
@@ -52,4 +50,4 @@ function createTable(db) {
 
 
 
-module.exports = createDbConnection()
+module.exports = createDbConnection;

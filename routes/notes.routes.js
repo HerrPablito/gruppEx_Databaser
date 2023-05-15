@@ -4,8 +4,15 @@ const router = Router()
 
 
 //spara antekningar
-router.post('/signup', (request, response) => {
-
+router.post('/signup', async (request, response) => {
+    try {
+        const { user_name, password } = request.body;
+        const result = await saveUser(user_name, password);
+        response.json(result);
+    } catch (error) {
+        console.log('Error:', error);
+        response.status(500).json({ success: false, message: error.message });
+    }
 
 })
 //Hämta anteckningar

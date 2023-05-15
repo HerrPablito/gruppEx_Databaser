@@ -5,12 +5,12 @@ const db = connectToDb();
 
 
 
-function saveUser(user_name, password) {
+function saveChannel(user_id, channel_name) {
 
     return new Promise((resolve, reject) => {
         db.run(`
-        INSERT INTO Users (user_id, user_name, password) VALUES (?, ?, ?)`,
-            [uuid(), user_name, password],
+        INSERT INTO channels (owner_id, channel_name) VALUES (?, ?)`,
+            [user_id, channel_name],
             function (error) {
                 if (error) {
                     reject(error.message);
@@ -22,5 +22,4 @@ function saveUser(user_name, password) {
     });
 
 }
-
-module.exports = { saveUser };
+module.exports = saveChannel;

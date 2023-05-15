@@ -1,13 +1,14 @@
-const { Router } = require('express')
+const { Router } = require('express');
+const { postNotes, getNotes } = require('../model/notes.model');
 
 const router = Router()
 
 
 //spara antekningar
-router.post('/signup', async (request, response) => {
+router.post('/', async (request, response) => {
     try {
-        const { user_name, password } = request.body;
-        const result = await saveUser(user_name, password);
+        const { channel_name, note_title, note_content, user_id } = request.body;
+        const result = await postNotes(channel_name, note_title, note_content, user_id);
         response.json(result);
     } catch (error) {
         console.log('Error:', error);
@@ -16,10 +17,10 @@ router.post('/signup', async (request, response) => {
 
 })
 //Hämta anteckningar
-router.post('/notes', async (request, response) => {
+router.get('/:user_id', async (request, response) => {
     try {
-        const { user_id } = request.body;
-        const result = await saveUser(user_name, password);
+        const { user_id } = request.params;
+        const result = await getNotes(user_id);
         response.json(result);
     } catch (error) {
         console.log('Error:', error);

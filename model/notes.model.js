@@ -41,6 +41,5 @@ function postNotes(channel_name, note_title, note_content, user_id) {
             };
         }); 
     })
-
 }
 module.exports =  { getNotes, postNotes };

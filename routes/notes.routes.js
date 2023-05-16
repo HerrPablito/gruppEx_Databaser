@@ -12,9 +12,12 @@ router.post('/', async (request, response) => {
         response.json(result);
     } catch (error) {
         console.log('Error:', error);
-        response.status(500).json({ success: false, message: error.message });
+        if (error === 'User is not a subscriber') {
+            response.status(403).json({ success: false, message: error });
+        } else {
+            response.status(500).json({ success: false, message: error.message });
+        }
     }
-
 })
 //Hämta anteckningar
 router.get('/:user_id', async (request, response) => {

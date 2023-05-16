@@ -6,4 +6,4 @@ const db = createDbConnection();
  
 // db.run(`INSERT INTO subscriptions VALUES ("x1", "2") `)
 
- db.run(`DELETE FROM users WHERE user_name = "p" `)
+// db.run(`DELETE FROM users WHERE user_name = "p" `)

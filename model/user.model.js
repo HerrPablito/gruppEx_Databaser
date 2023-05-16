@@ -40,11 +40,46 @@ function showSubscriptedNotes(user_id) {
                 };
             }); 
     });
+ }
 
+ function showSubscriptedNotesByDateOldest(user_id) {
+    return new Promise((resolve, reject) => {
+        db.all(`SELECT * FROM notes 
+        JOIN channels ON notes.channel_name = channels.channel_name 
+        JOIN  subscriptions ON channels.channel_id = subscriptions.channel_id
+        WHERE subscriptions.user_id = ? ORDER BY note_date ASC`, 
+        [user_id],
+            (error, rows) => {
+                if (error) {
+                    reject(error.message);
+                }
+                else {
+                    resolve (rows)
+                };
+            }); 
+    });
+ }
 
+ function showSubscriptedNotesByDateNewest(user_id) {
+    return new Promise((resolve, reject) => {
+        db.all(`SELECT * FROM notes 
+        JOIN channels ON notes.channel_name = channels.channel_name 
+        JOIN  subscriptions ON channels.channel_id = subscriptions.channel_id
+        WHERE subscriptions.user_id = ? ORDER BY note_date DESC`, 
+        [user_id],
+            (error, rows) => {
+                if (error) {
+                    reject(error.message);
+                }
+                else {
+                    resolve (rows)
+                };
+            }); 
+    });
  }
 
 
 
 
-module.exports = { saveUser, showSubscriptedNotes };
+
+module.exports = { saveUser, showSubscriptedNotes, showSubscriptedNotesByDateOldest, showSubscriptedNotesByDateNewest };

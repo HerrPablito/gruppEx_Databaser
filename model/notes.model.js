@@ -7,7 +7,7 @@ const { checkIfUserIsSubscriber } = require('../utils/dbDataCheck.js');
 function getNotes(user_id) {
 
     return new Promise((resolve, reject) => {
-        db.all(`SELECT * FROM notes WHERE poster = ?`,
+        db.all(`SELECT * FROM notes WHERE poster = ? `,
             [user_id],
             (error, rows) => {
                 if (error) {
@@ -19,6 +19,41 @@ function getNotes(user_id) {
             });
     });
 }
+
+function getNotesByDateOldest (user_id) {
+
+    return new Promise((resolve, reject) => {
+        db.all(`SELECT * FROM notes WHERE poster = ? ORDER BY note_date ASC`,
+            [user_id],
+            (error, rows) => {
+                if (error) {
+                    reject(error.message);
+                }
+                else {
+                    resolve(rows)
+                };
+            });
+    });
+}
+function getNotesByDateNewest (user_id) {
+
+    return new Promise((resolve, reject) => {
+        db.all(`SELECT * FROM notes ASC WHERE poster = ? ORDER BY note_date DESC`,
+            [user_id],
+            (error, rows) => {
+                if (error) {
+                    reject(error.message);
+                }
+                else {
+                    resolve(rows)
+                };
+            });
+    });
+}
+
+
+
+
 
 async function postNotes(channel_name, note_title, note_content, user_id) {
 
@@ -51,4 +86,4 @@ async function postNotes(channel_name, note_title, note_content, user_id) {
             });
     })
 }
-module.exports = { getNotes, postNotes };
+module.exports = { getNotes, postNotes, getNotesByDateOldest, getNotesByDateNewest };

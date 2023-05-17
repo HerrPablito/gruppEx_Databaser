@@ -81,7 +81,7 @@ async function postNotes(channel_name, note_title, note_content, user_id) {
                         createdAt: createdAt,
                         user_id: user_id
                     }
-                    resolve({ success: true, noteData: noteData });
+                    resolve(noteData);
                 };
             });
     })

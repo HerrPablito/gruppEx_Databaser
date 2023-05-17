@@ -7,10 +7,17 @@ const router = Router()
 //spara antekningar
 router.post('/', async (request, response) => {
 
-    
     try {
-        const { channel_name, note_title, note_content, user_id } = request.body;
-        const result = await postNotes(channel_name, note_title, note_content, user_id);
+        let result = [];
+        const { channel_name, note_title, note_content, user_id } = await request.body;
+        for (let index = 0; index < channel_name.length; index++) {
+            
+            let resp = await postNotes(channel_name[index], note_title, note_content, user_id);
+            result.push(resp);
+
+            
+        }
+
         response.json(result);
     } catch (error) {
         console.log('Error:', error);

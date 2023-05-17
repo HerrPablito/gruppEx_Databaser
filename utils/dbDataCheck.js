@@ -5,6 +5,7 @@ const db = connectToDb();
 
 function checkIfUserIsSubscriber(user_id, channel_name) {
     return new Promise((resolve, reject) => {
+        console.log(user_id, channel_name)
         db.get(`
         SELECT * FROM subscriptions
         JOIN channels ON subscriptions.channel_id = channels.channel_id
